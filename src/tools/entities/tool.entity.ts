@@ -6,6 +6,7 @@ import {
   ManyToOne,
   JoinColumn,
   ManyToMany,
+  CreateDateColumn,
 } from 'typeorm';
 import { Tag } from './tag.entity';
 
@@ -18,7 +19,7 @@ export class Tool {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn()
+  @JoinColumn({ name: 'sentBy' })
   user: User;
 
   @Column('string')
@@ -33,4 +34,7 @@ export class Tool {
   @ManyToMany(() => Tag)
   @JoinColumn()
   tags: Tag[];
+
+  @CreateDateColumn()
+  createdAt: string;
 }
