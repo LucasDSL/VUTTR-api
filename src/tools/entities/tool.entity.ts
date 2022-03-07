@@ -22,7 +22,7 @@ export class Tool {
   @JoinColumn({ name: 'sentBy' })
   user: User;
 
-  @Column('string')
+  @Column()
   name: string;
 
   @Column('text')

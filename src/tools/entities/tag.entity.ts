@@ -5,6 +5,6 @@ export class Tag {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('string')
+  @Column()
   name: string;
 }

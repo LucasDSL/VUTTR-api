@@ -16,13 +16,13 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('string', { length: 12, unique: true, nullable: false })
+  @Column({ length: 12, unique: true, nullable: false })
   username: string;
 
-  @Column('string', { unique: true, nullable: false })
+  @Column({ unique: true, nullable: false })
   email: string;
 
-  @Column('string')
+  @Column()
   password: string;
 
   @OneToMany(() => Tool, (tool) => tool.user)
