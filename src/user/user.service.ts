@@ -19,4 +19,8 @@ export class UserService {
     const newUser = this.UserRepository.create(createUserDto);
     return this.UserRepository.save(newUser);
   }
+
+  getData(user: any) {
+    return this.UserRepository.findOne({ id: user.userId });
+  }
 }
