@@ -1,3 +1,6 @@
+# credentials 
+.env
+src/auth/strategies/constants.ts
 # compiled output
 /dist
 /node_modules
