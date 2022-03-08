@@ -22,7 +22,7 @@ export class User {
   @Column({ unique: true, nullable: false })
   email: string;
 
-  @Column()
+  @Column({ nullable: false })
   password: string;
 
   @OneToMany(() => Tool, (tool) => tool.user)
