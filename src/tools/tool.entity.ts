@@ -1,4 +1,4 @@
-import { User } from 'src/user/entities/user.entity';
+import { User } from 'src/user/user.entity';
 import {
   Entity,
   Column,
@@ -7,8 +7,10 @@ import {
   JoinColumn,
   ManyToMany,
   CreateDateColumn,
+  JoinTable,
+  OneToMany,
 } from 'typeorm';
-import { Tag } from './tag.entity';
+import { Tag } from '../tags/tag.entity';
 
 @Entity()
 export class Tool {
@@ -32,7 +34,7 @@ export class Tool {
   link: string;
 
   @ManyToMany(() => Tag)
-  @JoinColumn()
+  @JoinTable()
   tags: Tag[];
 
   @CreateDateColumn()
