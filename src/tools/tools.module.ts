@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from 'src/user/user.module';
 import { TagsModule } from 'src/tags/tags.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { ToolTagsModule } from 'src/tool-tags/tool-tags.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { AuthModule } from 'src/auth/auth.module';
     UserModule,
     TagsModule,
     AuthModule,
+    ToolTagsModule,
   ],
   controllers: [ToolsController],
   providers: [ToolsService],

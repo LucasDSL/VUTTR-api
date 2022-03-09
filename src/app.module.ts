@@ -12,6 +12,8 @@ import { Tool } from './tools/tool.entity';
 import { Tag } from './tags/tag.entity';
 import { ConfigModule } from '@nestjs/config';
 import { TagsModule } from './tags/tags.module';
+import { ToolTags } from './tool-tags/toolTags.entity';
+import { ToolTagsModule } from './tool-tags/tool-tags.module';
 
 @Module({
   imports: [
@@ -27,9 +29,10 @@ import { TagsModule } from './tags/tags.module';
       port: Number.parseInt(process.env.DB_PORT),
       host: process.env.DB_HOST,
       synchronize: true,
-      entities: [User, Tool, Tag],
+      entities: [User, Tool, Tag, ToolTags],
     }),
     TagsModule,
+    ToolTagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

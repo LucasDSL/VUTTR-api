@@ -7,6 +7,7 @@ import {
   Post,
   UseGuards,
   Request,
+  Param,
 } from '@nestjs/common';
 import { ToolsService } from './tools.service';
 import { CreateToolDto } from './dto/create-tool.dto';
@@ -23,9 +24,9 @@ export class ToolsController {
     return this.toolsService.createTool(createToolDto, req.user);
   }
 
-  @Get()
+  @Get('/:page?')
   @HttpCode(HttpStatus.FOUND)
-  getTools() {
-    return this.toolsService.getTools();
+  getTools(@Param('page') page?: number) {
+    return this.toolsService.allTools(page);
   }
 }

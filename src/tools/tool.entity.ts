@@ -5,12 +5,8 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
-  ManyToMany,
   CreateDateColumn,
-  JoinTable,
-  OneToMany,
 } from 'typeorm';
-import { Tag } from '../tags/tag.entity';
 
 @Entity()
 export class Tool {
@@ -32,10 +28,6 @@ export class Tool {
 
   @Column('varchar', { length: 350 })
   link: string;
-
-  @ManyToMany(() => Tag)
-  @JoinTable()
-  tags: Tag[];
 
   @CreateDateColumn()
   createdAt: string;
