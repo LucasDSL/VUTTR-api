@@ -7,10 +7,11 @@ import { ToolsModule } from './tools/tools.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { User } from './user/entities/user.entity';
-import { Tool } from './tools/entities/tool.entity';
-import { Tag } from './tools/entities/tag.entity';
+import { User } from './user/user.entity';
+import { Tool } from './tools/tool.entity';
+import { Tag } from './tags/tag.entity';
 import { ConfigModule } from '@nestjs/config';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true,
       entities: [User, Tool, Tag],
     }),
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
