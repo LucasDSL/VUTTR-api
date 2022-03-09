@@ -8,6 +8,7 @@ import {
   UseGuards,
   Request,
   Param,
+  Delete,
 } from '@nestjs/common';
 import { ToolsService } from './tools.service';
 import { CreateToolDto } from './dto/create-tool.dto';
@@ -28,5 +29,12 @@ export class ToolsController {
   @HttpCode(HttpStatus.FOUND)
   getTools(@Param('page') page?: number) {
     return this.toolsService.allTools(page);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('/:id')
+  @HttpCode(HttpStatus.OK)
+  deleteTool(@Param('id') id: string, @Request() req: any) {
+    return this.toolsService.delete(id, req.user);
   }
 }

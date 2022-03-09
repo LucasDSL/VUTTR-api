@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from 'src/tags/tag.entity';
 import { TagsService } from 'src/tags/tags.service';
@@ -71,5 +75,19 @@ export class ToolsService {
   async findTagsByTool(tool: Tool) {
     const relations = await this.toolTagsService.findByTool(tool);
     return relations.map((rel) => rel.tag.name);
+  }
+
+  async delete(id: string, user) {
+    const userFound = await this.userService.findOneById(user.userId);
+
+    const tool = await this.ToolsRepository.findOne(
+      { id: id },
+      { relations: ['user'] },
+    );
+    if (tool.user.id !== userFound.id) {
+      throw new UnauthorizedException();
+    }
+
+    return this.ToolsRepository.delete({ id: id });
   }
 }
