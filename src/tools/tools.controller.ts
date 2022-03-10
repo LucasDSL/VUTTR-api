@@ -9,6 +9,7 @@ import {
   Request,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ToolsService } from './tools.service';
 import { CreateToolDto } from './dto/create-tool.dto';
@@ -27,7 +28,10 @@ export class ToolsController {
 
   @Get('/:page?')
   @HttpCode(HttpStatus.FOUND)
-  getTools(@Param('page') page?: number) {
+  getTools(@Param('page') page?: number, @Query('tag') tag?: string) {
+    if (tag) {
+      return this.toolsService.getByTag(tag);
+    }
     return this.toolsService.allTools(page);
   }
 

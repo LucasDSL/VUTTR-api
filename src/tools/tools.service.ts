@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -57,7 +58,6 @@ export class ToolsService {
     const tools = await this.getTools(page);
     const promisesFormatedTools = tools.map(async (tool) => {
       const tags = await this.findTagsByTool(tool);
-      console.log({ ...tool, tags: tags });
       return { ...tool, tags: tags };
     });
 
@@ -89,5 +89,18 @@ export class ToolsService {
     }
 
     return this.ToolsRepository.delete({ id: id });
+  }
+
+  async getByTag(tag: string) {
+    const tagFound = await this.tagsService.findByName(tag);
+    if (!tagFound) {
+      throw new BadRequestException('Tag not found!');
+    }
+    const relationsToolTag = await this.toolTagsService.findByTag(tagFound);
+    const tools = relationsToolTag.map((rel) => rel.tool);
+    const toolWithTags = tools.map(async (tool) => {
+      return { ...tool, tags: await this.findTagsByTool(tool) };
+    });
+    return Promise.all(toolWithTags);
   }
 }
