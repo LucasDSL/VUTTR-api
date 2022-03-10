@@ -1,6 +1,8 @@
 # credentials 
 .env
 src/auth/strategies/constants.ts
+ormconfig.json
+
 # compiled output
 /dist
 /node_modules
