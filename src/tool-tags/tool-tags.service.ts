@@ -26,8 +26,8 @@ export class ToolTagsService {
     });
   }
 
-  createRelation(tool: Tool, tag: Tag) {
+  async createRelation(tool: Tool, tag: Tag) {
     const relation = this.ToolsTagsRepository.create({ tool, tag });
-    return this.ToolsTagsRepository.save(relation);
+    await this.ToolsTagsRepository.save(relation);
   }
 }

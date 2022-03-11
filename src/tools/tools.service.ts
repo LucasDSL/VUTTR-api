@@ -1,6 +1,5 @@
 import {
   BadRequestException,
-  ConflictException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -35,23 +34,25 @@ export class ToolsService {
     const createdTool = await this.ToolsRepository.save(toolModel);
 
     const tags = createToolDto.tags;
-    await this.validateTags(tags);
-    tags.forEach(async (tag) => {
-      await this.toolTagsService.createRelation(
-        createdTool,
-        await this.tagsService.findByName(tag),
-      );
-    });
+    const tagsEntities = await this.validateTags(tags);
+
+    for (const tag of tagsEntities) {
+      await this.toolTagsService.createRelation(createdTool, tag);
+    }
   }
 
   async validateTags(tagNames: string[]) {
-    tagNames.forEach(async (name) => {
+    for (const name of tagNames) {
       const isThereTag = await this.tagsService.findByName(name);
       if (!isThereTag) {
         const newTag = this.tagsService.create(name);
         await this.tagsService.save(newTag);
       }
-    });
+    }
+
+    return Promise.all(
+      tagNames.map(async (name) => await this.tagsService.findByName(name)),
+    );
   }
 
   async allTools(page: number | undefined) {

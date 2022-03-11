@@ -22,7 +22,7 @@ import { ToolTagsModule } from './tool-tags/tool-tags.module';
     UserModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-      entities: [User, Tool],
+      entities: [User, Tool, Tag, ToolTags],
     }),
     TagsModule,
     ToolTagsModule,
