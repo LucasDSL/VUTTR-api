@@ -1,8 +1,15 @@
+# syntax=docker/dockerfile:1
 FROM node:17
+ENV NODE_ENV=development
+
 WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install 
+
 COPY . .
-ARG PORT_BUILD=6000
-ENV PORT=$PORT_BUILD
-EXPOSE $PORT_BUILD
-RUN npm install
-ENTRYPOINT npm start 
+VOLUME ["/app/node_modules"]
+RUN npm run build 
+
+CMD ["node", "dist/main"]

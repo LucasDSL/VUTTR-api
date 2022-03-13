@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  api:
+    image: lucasdsl/vuttr
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    depends_on:
+      - database
+    ports:
+      - 3000:3000
+    volumes: 
+      - .:/app
+      - '/app/node_modules'
+
+  database:
+    image: ${DB_TYPE}
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD:${DB_ROOT_PW}
+      - MYSQL_USER:${username}
+      - MYSQL_PASSWORD:${password}
+      - MYSQL_DATABASE:${DB_NAME}
