@@ -1,24 +1,28 @@
-version: '3.9'
+version: "3.9"
 services:
-  api:
-    image: lucasdsl/vuttr
-    build:
-      dockerfile: Dockerfile
-      context: ./
-    depends_on:
-      - database
-    ports:
-      - 3000:3000
-    volumes: 
-      - .:/app
-      - '/app/node_modules'
-
   database:
-    image: ${DB_TYPE}
-    ports:
-      - 3306:3306
+    image: mysql:8.0
+    networks: 
+      - compose-bridge
     environment:
-      - MYSQL_ROOT_PASSWORD:${DB_ROOT_PW}
-      - MYSQL_USER:${username}
-      - MYSQL_PASSWORD:${password}
-      - MYSQL_DATABASE:${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=my_secret_pw
+      - MYSQL_USER=${username}
+      - MYSQL_PASSWORD=${password}
+      - MYSQL_DATABASE=${DB_NAME}
+
+  api:
+      image: lucasdsl/vuttrapi:1.4
+      container_name: vuttrapi
+      build:
+        dockerfile: Dockerfile
+        context: ./
+      depends_on:
+        - database
+      networks: 
+        - compose-bridge
+      ports:
+        - 3000:3000
+
+networks: 
+  compose-bridge:
+    driver: bridge
