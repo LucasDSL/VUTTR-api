@@ -12,4 +12,4 @@ COPY . .
 VOLUME ["/app/node_modules"]
 RUN npm run build 
 
-CMD ["node", "dist/main"]
+RUN npm 
