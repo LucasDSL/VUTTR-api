@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Tag } from 'src/tags/tag.entity';
-import { Tool } from 'src/tools/tool.entity';
+import { Tag } from '../tags/tag.entity';
+import { Tool } from '../tools/tool.entity';
 import { Repository } from 'typeorm';
 import { ToolTags } from './toolTags.entity';
 

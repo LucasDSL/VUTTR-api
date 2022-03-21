@@ -4,10 +4,9 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Tag } from 'src/tags/tag.entity';
-import { TagsService } from 'src/tags/tags.service';
-import { ToolTagsService } from 'src/tool-tags/tool-tags.service';
-import { UserService } from 'src/user/user.service';
+import { TagsService } from '../tags/tags.service';
+import { ToolTagsService } from '../tool-tags/tool-tags.service';
+import { UserService } from '../user/user.service';
 import { Repository } from 'typeorm';
 import { CreateToolDto } from './dto/create-tool.dto';
 import { Tool } from './tool.entity';

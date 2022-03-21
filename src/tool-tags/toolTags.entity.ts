@@ -1,5 +1,5 @@
-import { Tag } from 'src/tags/tag.entity';
-import { Tool } from 'src/tools/tool.entity';
+import { Tag } from '../tags/tag.entity';
+import { Tool } from '../tools/tool.entity';
 import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
