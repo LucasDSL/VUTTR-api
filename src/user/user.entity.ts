@@ -1,4 +1,4 @@
-import { Tool } from 'src/tools/tool.entity';
+import { Tool } from '../tools/tool.entity';
 import {
   Entity,
   Column,
