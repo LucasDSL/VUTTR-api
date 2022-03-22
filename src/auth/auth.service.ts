@@ -1,6 +1,6 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
-import { compare, compareSync } from 'bcrypt';
+import { compareSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
