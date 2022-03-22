@@ -41,4 +41,11 @@ export class User {
       this.password = hashSync(this.password, 8);
     }
   }
+
+  constructor(user?: Partial<User>) {
+    this.id = user?.id;
+    this.email = user?.email;
+    this.password = user?.password;
+    this.username = user?.username;
+  }
 }
