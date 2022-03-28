@@ -7,4 +7,9 @@ export class Tag {
 
   @Column({ unique: true, nullable: false })
   name: string;
+
+  constructor(tag: Partial<Tag>) {
+    this.name = tag?.name;
+    this.id = tag?.id;
+  }
 }
